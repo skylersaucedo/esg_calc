@@ -1,18 +1,27 @@
-import { AppHeader } from '@corva/ui/components';
+import { useState } from 'react';
+import { AppHeader, Select, MenuItem } from '@corva/ui/components';
 import PropTypes from 'prop-types';
 import { DEFAULT_SETTINGS } from './constants';
-import { UserInputSection } from './assets/components/user_input'
+import { Drilling } from './components/Drilling';
+import { Completion } from './components/Completion';
 
-import logo from './assets/logo.svg';
 import styles from './App.css';
 
 function App(props) {
-  const { isExampleCheckboxChecked, appHeaderProps } = props;
+  const { appHeaderProps } = props;
+  const [segment, setSegment] = useState('drilling');
+
   return (
     <div className={styles.container}>
       <AppHeader {...appHeaderProps} />
       <div className={styles.content}>
-        <UserInputSection />  
+        <Select label="Segment" value={segment} onChange={event => setSegment(event.target.value)}>
+          <MenuItem value="drilling">Drilling</MenuItem>
+          <MenuItem value="completion">Completion</MenuItem>
+        </Select>
+        <br />
+        <br />
+        {segment === 'drilling' ? <Drilling /> : <Completion />}
       </div>
     </div>
   );
