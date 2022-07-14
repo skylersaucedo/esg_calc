@@ -22,7 +22,6 @@
       "completion"
     ],
     "ui": {
-      "multi_rig" : true,
       "initial_size": {
         "w": 4,
         "h": 10
