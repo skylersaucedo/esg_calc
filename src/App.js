@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AppHeader, Select, MenuItem } from '@corva/ui/components';
+import { getAppStorage } from '@corva/ui/clients/jsonApi';
 import PropTypes from 'prop-types';
 import { DEFAULT_SETTINGS } from './constants';
 import { Drilling } from './components/Drilling';
@@ -10,6 +11,16 @@ import styles from './App.css';
 function App(props) {
   const { appHeaderProps } = props;
   const [segment, setSegment] = useState('drilling');
+
+  const activeWellAssetId = props.wells.find(({ isActive }) => isActive)?.data?.asset_id;
+
+  useEffect(async () => {
+    const prediction = await getAppStorage('corva', 'completion.predictions', activeWellAssetId, {
+      limit: 1,
+      sort: '{timestamp: -1}',
+    });
+    console.log(prediction);
+  }, [activeWellAssetId]);
 
   return (
     <div className={styles.container}>

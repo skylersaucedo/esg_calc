@@ -10,7 +10,7 @@ export function CompletionInput({ calcParams, onParamsChange }) {
         InputProps={{ startAdornment: <InputAdornment position="start">psi</InputAdornment> }}
         onChange={event => onParamsChange('fracPressGradient', event.target.value)}
         value={calcParams.fracPressGradient}
-        />
+      />
 
       <TextField
         label="Total fluid injected"
