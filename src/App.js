@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AppHeader, Select, MenuItem, Button } from '@corva/ui/components';
+import { LoadingIndicator, AppHeader, Select, MenuItem, Button } from '@corva/ui/components';
 // import { getAppStorage } from '@corva/ui/clients/jsonApi';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
@@ -10,6 +10,8 @@ import { CompletionOutput } from './components/CompletionOutput';
 import { DrillingInput } from './components/DrillingInput';
 import { DrillingOutput } from './components/DrillingOutput';
 
+import { HighChartThing } from './components/MetricTonsPerStage';
+import { useDeepData } from './effects/useDeepsData';
 import styles from './App.css';
 
 const initialDrillingParams = {
@@ -113,6 +115,8 @@ function App(props) {
     // setOutput(response);
   };
 
+  const {useDeepData} = useDeepData({ asset_id, dataset});
+
   return (
     <div className={styles.container}>
       <AppHeader {...appHeaderProps} />
@@ -141,6 +145,14 @@ function App(props) {
         <Button className={classes.button} variation="primary" onClick={handleClick}>
           Caculate
         </Button>
+      </div>
+
+      <div>
+        {/* add chart here? */}
+        {loading && <LoadingIndicator />}
+        {!loading && (
+          <WITSSummaryChart data={witsSummaryData} coordinates={coordinates} dataset={dataset} />
+        )}
       </div>
     </div>
   );
