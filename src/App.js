@@ -12,6 +12,7 @@ import { DrillingOutput } from './components/DrillingOutput';
 
 //import { HighChartThing } from './components/MetricTonsPerStage';
 //import { useDeepData } from './effects/useDeepsData';
+import { Chart } from './components/Chart';
 import styles from './App.css';
 
 const initialDrillingParams = {
@@ -145,8 +146,9 @@ function App(props) {
         <Button className={classes.button} variation="primary" onClick={handleClick}>
           Caculate
         </Button>
-      </div>
 
+        <Chart />
+      </div>
     </div>
   );
 }
